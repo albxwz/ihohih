@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Piazzolla:wght@200&family=Playfair:ital@1&display=swap');
+</style>
+
+ <style>
+@media screen and (max-width: 1280px) {div.contentblock {width: 1200px;} } 
+@media screen and (max-width: 1140px) { div.contentblock {width: 1024px;} } 
+@media screen and (max-width: 992px) { div. contentblock {width: 970px;} } 
+
+
+
+.hgh{
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      display: flex;
+      justify-content: center;
+    }
+
+    .timer__items {
+      display: flex;
+      font-size: 25px;
+      color: black;
+    }
+
+
+    .timer__item {
+      position: relative;
+      min-width: 60px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-bottom: 15px;
+    }
+
+
+    .timer__item::before {
+      content: attr(data-title);
+      display: block;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      font-size: 10px;
+    }
+
+
+    .timer__item:not(:last-child)::after {
+      content: ':';
+      position: absolute;
+      right: -15px;
+    }
+  </style>
+
+
+ <style>
+
+
+
+
+
+   body {
+  height:100%;
+        background: url(fyhmjk,h,kmh.png) ;
+       background-size: 100%;
+        
+  background-position: fixed;
+ }
+
+ .fixed{
+  background-position: fixed;
+ }
+  </style>
+
+
+  <style>
+.element-animation {
+  margin: 2rem 0;
+  font-size: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.element-animation.element-show {
+  opacity: 1;
+  transition: all 1.5s;
+  transform: translateY(0%);
+}
+
+
+
+
+.form-inner {
+   position: relative;
+}
+.form-inner h3 {
+   position: relative;
+   margin-top: 0;
+   color: black;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 300;
+   font-size: 20px;
+   text-align: center;
+   text-transform: uppercase;
+}
+
+}
+.form-inner label {
+   display: block;
+   padding-left: 15px;
+   font-family: 'Roboto', sans-serif;
+   color: rgba(255, 255, 255, .6);
+   text-transform: uppercase;
+   font-size: 14px;
+}
+.form-inner input {
+   display: block;
+   width: 50%;
+   padding: 0 15px;
+   margin: 10px 0 15px;
+   border-width: 0;
+   line-height: 40px;
+   border-radius: 20px;
+   color: black;
+  
+   font-family: 'Roboto', sans-serif;
+background-color: #FFF6BD;
+}
+
+.form-inner textarea {
+   display: block;
+   width: 50%;
+   height: 50px;
+   padding: 0 15px;
+   margin: 10px 0 15px;
+   border-width: 0;
+   line-height: 40px;
+   border-radius: 20px;
+   color: black;
+ 
+   font-family: 'Roboto', sans-serif;
+   background-color: #FFF6BD;
+}
+
+.form-inner input[type="submit"] {
+    background: linear-gradient(to top left, #ffcc00 0%, #ffffcc 100%);
+
+
+
+}
+  </style>
+
+<script>
+window.onload = function(){
+    document.body.scrollTop = 0;
+}</script>
+
+<style>
+audio::-webkit-media-controls-panel {
+  background-color: #FFFFFF ;
+
+}
+</style>
+
+
+
+
+  <script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // конечная дата
+      const deadline = new Date(new Date().getFullYear(), new Date().getMonth() + 0, 15);
+      // id таймера
+      let timerId = null;
+      // склонение числительных
+      function declensionNum(num, words) {
+        return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+      }
+      // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+      function countdownTimer() {
+        const diff = deadline - new Date();
+        if (diff <= 0) {
+          clearInterval(timerId);
+        }
+        const days = diff > 0 ? Math.floor(diff / 1000 / 60 / 60 / 24) : 0;
+        const hours = diff > 0 ? Math.floor(diff / 1000 / 60 / 60) % 24 : 0;
+        const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+        const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+        $days.textContent = days < 10 ? '0' + days : days;
+        $hours.textContent = hours < 10 ? '0' + hours : hours;
+        $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+        $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+        $days.dataset.title = declensionNum(days, ['день', 'дня', 'дней']);
+        $hours.dataset.title = declensionNum(hours, ['час', 'часа', 'часов']);
+        $minutes.dataset.title = declensionNum(minutes, ['минута', 'минуты', 'минут']);
+        $seconds.dataset.title = declensionNum(seconds, ['секунда', 'секунды', 'секунд']);
+      }
+      // получаем элементы, содержащие компоненты даты
+      const $days = document.querySelector('.timer__days');
+      const $hours = document.querySelector('.timer__hours');
+      const $minutes = document.querySelector('.timer__minutes');
+      const $seconds = document.querySelector('.timer__seconds');
+      // вызываем функцию countdownTimer
+      countdownTimer();
+      // вызываем функцию countdownTimer каждую секунду
+      timerId = setInterval(countdownTimer, 1000);
+    });
+  </script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<title>Қоныс тойға шақыру!</title>
+
+  </head>
+  <body>
+
+
+<img src="jmk,jyh,mkjh,jkh,.png" style="width: 100%; height: 100%;">
+
+
+    <audio><source type="audio/mpeg"src="002_01_05.mp3"/>
+</audio><button   type = "button" name = "button2" onclick="this.previousSibling.play()" style = "border-radius: 50%;border:none;position: fixed;
+    left: 3px;
+    top: 5px;width: 50px; height:50px">
+<img src = "https://i8.wampi.ru/2019/06/28/BEZ-IMENI-1.gif
+" alt = "up" width = "40" height = "40" style="position: center;"></button>
+
+
+
+
+
+
+
+
+
+<div class="element-animation">
+<center><img src="ghmghjm.png" style="width:95%; margin-top: 0px;"></center>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="element-animation">
+<center><h6 style="font-family:piazzolla; color: black; margin-top: 50px; ">Қоныс тойдың басталуына:
+</h6></center>
+</div>
+
+<div class="element-animation">
+<center>
+ <div class="timer" >
+  <div class="hgh">
+    <div class="timer__items" >
+
+      <div class="timer__item timer__days">00</div>
+      <div class="timer__item timer__hours">00</div>
+      <div class="timer__item timer__minutes">00</div>
+      <div class="timer__item timer__seconds">00</div>
+    </div></div>
+  </div>
+</center>
+</div>
+
+
+<center><h7 style="font-family:piazzolla; color: black; margin-top: px; ">қалды
+</h7></center>
+
+
+
+
+
+
+
+
+
+
+<div class="element-animation">
+<center><img src="key.png" style="width:60%; margin-top: 0px;"></center>
+</div>
+
+
+
+
+
+<script>
+  function onEntry(entry) {
+  entry.forEach(change => {
+    if (change.isIntersecting) {
+     change.target.classList.add('element-show');
+    }
+  });
+}
+let options = {
+  threshold: [0.5] };
+let observer = new IntersectionObserver(onEntry, options);
+let elements = document.querySelectorAll('.element-animation');
+for (let elm of elements) {
+  observer.observe(elm);
+}
+</script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https: //fonts.googleapis.com/css2?family= Piazzolla :wght@100 & display=swap" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+
